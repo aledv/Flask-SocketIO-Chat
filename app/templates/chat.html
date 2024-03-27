@@ -24,6 +24,15 @@
                         text = $('#text').val();
                         $('#text').val('');
                         socket.emit('text', {msg: text});
+                        socket.emit('start_loop');
+                    }
+                });
+                $('#text_stop').keypress(function(e) {
+                    var code = e.keyCode || e.which;
+                    if (code == 13) {
+                        text = $('#text').val();
+                        $('#text').val('');
+                        socket.emit('stop_loop');
                     }
                 });
             });
@@ -41,6 +50,7 @@
         <h1>Flask-SocketIO-Chat: {{ room }}</h1>
         <textarea id="chat" cols="80" rows="20"></textarea><br><br>
         <input id="text" size="80" placeholder="Enter your message here"><br><br>
+        <input id="text_stop" size="80" placeholder="Enter your message here"><br><br>
         <a href="#" onclick="leave_room();">Leave this room</a>
     </body>
 </html>
